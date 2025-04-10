@@ -1,10 +1,14 @@
 package it.ifoa.progettoblog.models;
 
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.*;
 
 @Entity
 @Table(name="posts")
+@JsonIgnoreProperties({"author"})
 public class Post {
 
     @Id
@@ -15,7 +19,7 @@ public class Post {
     private String title;
 
     @Column(nullable = false, length = 1000)
-    private String content;
+    private String body;
 
     @Column(nullable = true, length = 8)
     private String publishDate;
@@ -46,12 +50,12 @@ public class Post {
         this.title = title;
     }
 
-    public String getContent() {
-        return content;
+    public String getBody() {
+        return body;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setBody(String body) {
+        this.body = body;
     }
 
     public String getPublishDate() {
