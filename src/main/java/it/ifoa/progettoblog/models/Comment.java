@@ -1,5 +1,6 @@
 package it.ifoa.progettoblog.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
@@ -10,13 +11,17 @@ public class Comment {
     private Long id;
     
     @Column(nullable = true, length = 1000)
-    private String content;
+    private String body;
 
     @Column(nullable = true, length = 8)
     private String email;
-    
+
+    @Column(nullable = true, length = 8)
+    private String date;
+
     @ManyToOne
     @JoinColumn(name = "post_id", nullable = false)
+    @JsonIgnoreProperties({"comments"})
     private Post post;
     
     public Comment() {
@@ -30,12 +35,21 @@ public class Comment {
         this.id = id;
     }
 
-    public String getContent() {
-        return content;
+    public String getBody() {
+        return body;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setBody(String body) {
+        this.body = body;
+    }
+
+    
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public Post getPost() {
@@ -44,5 +58,13 @@ public class Comment {
 
     public void setPost(Post post) {
         this.post = post;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }
